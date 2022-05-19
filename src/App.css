@@ -1,38 +1,116 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;400;700;900&display=swap');
+
+@media only screen and (max-width: 600px) {
+  #packages {
+    border-radius: 0!important;
+  }
+}
+
+
+:root {
+  --yellow: rgb(255, 204, 0);
+  --red: rgb(212 5 17);
+  --black: rgba(0,0,0,0.9);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: var(--yellow);
+  color: var(--black);
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+#app {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#app > header {
+  padding: 50px 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#app > header h1 {
+  padding: 0 15px 0 10px;
+  border-top: 6px solid var(--red);
+  border-bottom: 6px solid var(--red);
+  color: var(--red);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 2.5rem;
+  display: inline-block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#packages {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.4);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#packages > ul {
+  display: inline-block;
+}
+
+#packages > ul > li {
+  width: calc(100% - 40px);
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.8);
+  overflow: visible;
+  display: inline-block;
+}
+
+#packages > ul > li > span {
+  margin: 0 0 10px;
+  padding: 0 0 5px;
+  color: var(--red);
+  font-weight: bold;
+  font-style: italic;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--black);
+  display: block;
+}
+
+ul.info > li {
+  margin-bottom: 5px;
   display: flex;
-  flex-direction: column;
+  gap: 15px;
+}
+
+ul.info > li > span:first-child {
+  width: 40%;
+  color: rgba(0,0,0,0.5);
+  display: inline-block;
+  text-align: right;
+}
+
+ul.info > li > span:last-child {
+  width: 60%;
+  display: inline-block;
+}
+
+#app > footer {
+  height: 50px;
+  padding: 30px 0;
+  color: var(--red);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-weight: 200;
+  font-size: 0.8rem;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
