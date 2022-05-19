@@ -100,7 +100,8 @@ body {
 
 #packages > ul > li > div > .order-info-received { background: rgba(100, 100, 100, 0.8); }
 #packages > ul > li > div > .ready-for-pickup { background: rgba(0, 120, 250, 0.8); }
-#packages > ul > li > div > .delivered { background: rgb(0, 150, 0); }
+#packages > ul > li > div > .delivered { background: rgba(0, 150, 0, 0.8); }
+#packages > ul > li > div > .on-the-way { background: rgba(0, 150, 0, 0.8); }
 
 ul.info > li {
   margin-bottom: 5px;
