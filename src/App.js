@@ -6,16 +6,17 @@ import mockData from './mockData.json';
 const jsonAddress = "https://my.api.mockaroo.com/orders.json?key=e49e6840";
 
 const Map = ({lat, long, width = 520, height = 200}) => {
-  const mapboxApiKey = "pk.eyJ1IjoidG1hcmtpIiwiYSI6IlVqTDJabncifQ.b2sMuSa0vQhZe3LekhHGsw";
-  const coords = [long, lat].join(",");
-  const size = [width, height].join("x");
-  const makiIcon = "gift";
-  const iconColour = "D40511";
-  const marker = "pin-s-" + makiIcon + "+" + iconColour + "(" + coords + ")";
-  const mapBoxSrc = "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/"
-                  + marker + "/" + coords + ",14/" + size
-                  + "?access_token=" + mapboxApiKey;
-  return (<img src={mapBoxSrc} alt="Map" />);
+  const bingBasicKey = "AhigxzE7Dngd184QTIo-A1z0JDbKGuDfWMsY6yAzbCODFw_xtv0WULWqMBN47U9-";
+  const coords = [lat,long].join(",");
+  const size = [width, height].join(",");
+  const iconStyle = "91"; // Styles: https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/pushpin-syntax-and-icon-styles
+  const bingMapSrc = "https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasLight?format=png&pushpin="
+    + coords + ";"
+    + iconStyle + "&mapSize="
+    + size + "&key="
+    + bingBasicKey;
+
+  return (<img src={bingMapSrc} alt="Map" />);
 }
 
 const Package = ({item}) => {
@@ -23,19 +24,23 @@ const Package = ({item}) => {
     <li>
       <div>
         <span className="title">Package #{item.id}</span>
-        <span className={"status " + item.status}>{item.status}</span>
+        <span className={"status " + item.status}>{item.status.replaceAll("-"," ")}</span>
       </div>
       <ul className="info">
-        <li><span>ETA:</span> <Moment date={item.eta} durationFromNow /></li>
+        <li><span>Estimated arrival:</span> <Moment date={item.eta} durationFromNow /></li>
         <li><span>Last updated:</span> <Moment date={item.last_updated} format="YYYY-MM-DD hh:mm" /></li>
-        <li><span>Location:</span> <span>{item.location_name}</span></li>
-        <li><span>Location status</span> <span>{item.location_status_ok ? "OK" : "Not OK"}</span></li>
+        <li>
+          <span>Location:</span>
+          <span className={item.location_status_ok ? "location ok" : "location not-ok"}>
+            {item.location_name}
+          </span>
+        </li>
         <li><span>Parcel ID:</span> <span>{item.parcel_id}</span></li>
         <li><span>Sender:</span> <span>{item.sender}</span></li>
         <li><span>User Name:</span> <span>{item.user_name}</span></li>
         <li><span>User Phone:</span> <span>{item.user_phone}</span></li>
         <li><span>Verification Required:</span> <span>{item.verification_required ? "Yes" : "No"}</span></li>
-        <li><span>Notes:</span> <span>{item.notes}</span></li>
+        {item.notes && <li><span>Notes:</span> <span>{item.notes}</span></li> }
         <li>
           <Map lat={item.location_coordinate_latitude} long={item.location_coordinate_longitude} />
         </li>
@@ -44,24 +49,35 @@ const Package = ({item}) => {
   );
 }
 
+const Loading = ({loadingDone}) => {
+  return (
+    <div id="loading" className={loadingDone ? "hidden" : ""}>
+      <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+  );
+}
+
 const Packages = () => {
 
   const [packages, setPackages] = useState([]);
+  const [loadingDone, setLoadingDone] = useState(false);
 
   // Fetch the date and put it in state
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(jsonAddress).catch((error) => {
-        console.log(error);
-        setPackages(mockData);
-      });
-      res.json().then(res => setPackages(res));
+      await fetch(jsonAddress)
+        .then(response => response.json())
+        .then(response => {
+          setLoadingDone(true);
+          setPackages(response);
+        });
     }
     fetchData();
   }, []);
-
+  console.log(loadingDone);
   return (
     <div id="packages">
+      <Loading loadingDone={loadingDone} />
       <ul>
         {packages.map((item) => (
           <Package key={item.id} item={item} />
