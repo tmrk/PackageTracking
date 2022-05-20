@@ -1,4 +1,3 @@
-
 const Search = ({packages, setPackages, searchTerm, setSearchTerm}) => {
 
   const handleChange = (event) => {
