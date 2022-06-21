@@ -3,9 +3,7 @@ import Loading from './Loading';
 import Search from './Search';
 import Package from './Package';
 
-const jsonAddress = "https://my.api.mockaroo.com/orders.json?key=e49e6840";
-
-const Packages = () => {
+const Packages = (props) => {
 
   const [packages, setPackages] = useState([]);
   const [loadingDone, setLoadingDone] = useState(false);
@@ -14,7 +12,7 @@ const Packages = () => {
   // Fetch the date and put it in state
   useEffect(() => {
     async function fetchData() {
-      await fetch(jsonAddress)
+      await fetch(props.jsonAddress)
         .then(response => response.json())
         .then(response => {
           setLoadingDone(true);
@@ -22,7 +20,7 @@ const Packages = () => {
         });
     }
     fetchData();
-  }, []);
+  }, [props.jsonAddress]);
 
   return (
     <div id="packages">

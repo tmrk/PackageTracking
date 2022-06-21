@@ -5,6 +5,7 @@
     border-radius: 0!important;
   }
 }
+
 /* Loading animation by https://loading.io/css/*/
 @keyframes lds-ellipsis1{0%{transform:scale(0)}100%{transform:scale(1)}}@keyframes lds-ellipsis3{0%{transform:scale(1)}100%{transform:scale(0)}}@keyframes lds-ellipsis2{0%{transform:translate(0,0)}100%{transform:translate(24px,0)}}.lds-ellipsis{display:inline-block;position:relative;width:80px;height:80px}.lds-ellipsis div{position:absolute;top:33px;width:13px;height:13px;border-radius:50%;background:#fff;animation-timing-function:cubic-bezier(0,1,1,0)}.lds-ellipsis div:nth-child(1){left:8px;animation:lds-ellipsis1 .6s infinite}.lds-ellipsis div:nth-child(2){left:8px;animation:lds-ellipsis2 .6s infinite}.lds-ellipsis div:nth-child(3){left:32px;animation:lds-ellipsis2 .6s infinite}.lds-ellipsis div:nth-child(4){left:56px;animation:lds-ellipsis3 .6s infinite}
 
@@ -79,14 +80,28 @@ body {
 }
 
 #packages {
+  --border-radius: 20px;
+  
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   background: rgba(255,255,255,0.4);
 }
 
 #search {
   padding: 10px 0;
   display: none;
+}
+
+#search.noresult::after {
+  padding: 30px 0 0 0;
+  color: rgba(255,255,255,0.6);
+  content: 'No result';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 #loading.hidden + #search {
@@ -125,7 +140,7 @@ body {
 #packages > ul > li {
   width: 100%;
   margin: 10px 0;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   background: rgba(255,255,255,0.85);
   overflow: visible;
   display: inline-flex;
@@ -141,8 +156,8 @@ body {
 }
 
 #packages > ul > li > .right {
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
   overflow-y: hidden;
   display: flex;
   align-items: center;
@@ -241,7 +256,7 @@ ul.info > li > span.location.not-ok::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 200;
+  font-weight: 700;
   font-size: 0.8rem;
   font-style: italic;
   text-transform: uppercase;

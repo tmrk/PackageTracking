@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Highlight from './Highlight';
 import Moment from 'react-moment';
 import Map from './Map';

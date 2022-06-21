@@ -1,4 +1,16 @@
-const Search = ({packages, setPackages, searchTerm, setSearchTerm}) => {
+const Search = ({packages, setPackages, setSearchTerm}) => {
+
+  // Check if there is any package that is not currently hidden, otherwise the search has no results
+  const noresult = () => {
+    let noresult = true;
+    for (let i = 0; i < packages.length; i++) {
+      if (!packages[i].hidden) {
+        noresult = false;
+        break;
+      }
+    }
+    return noresult;
+  }
 
   const handleChange = (event) => {
     const text = (event.target.value);
@@ -11,18 +23,24 @@ const Search = ({packages, setPackages, searchTerm, setSearchTerm}) => {
         + (item.user_name ? item.user_name : "")
         + (item.user_phone ? item.user_phone : "")
         + (item.notes ? item.notes : "");
+
       if (!stringToCheck.toLowerCase().includes(text.toLowerCase())) {
         item.hidden = true;
-      }
-      else item.hidden = false;
+      } else item.hidden = false;
+
       return item;
     });
     setPackages(filteredPackages);
+    console.log(packages)
   };
 
   return (
-    <div id="search">
-      <input type="text" placeholder="Search..." onChange={handleChange} />
+    <div id="search" className={noresult() ? 'noresult' : ''}>
+      <input 
+        type="text" 
+        placeholder="Search..." 
+        onChange={handleChange} 
+      />
     </div>
   );
 
