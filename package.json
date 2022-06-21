@@ -1,7 +1,7 @@
 {
   "name": "package-tracking",
-  "homepage": "https://tmrk.github.io/package-tracking/",
-  "version": "0.1.0",
+  "homepage": "https://tmrk.github.io/PackageTracking/",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "-": "^0.0.1",

@@ -95,7 +95,7 @@ body {
 #search.noresult::after {
   padding: 30px 0 0 0;
   color: rgba(255,255,255,0.6);
-  content: 'No result';
+  content: 'No results';
   display: flex;
   justify-content: center;
   align-items: center;
