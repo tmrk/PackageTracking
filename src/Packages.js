@@ -9,7 +9,7 @@ const Packages = (props) => {
   const [loadingDone, setLoadingDone] = useState(false);
   const [searchTerm, setSearchTerm] = useState();
 
-  // Fetch the date and put it in state
+  // Fetch the data and put it in state
   useEffect(() => {
     async function fetchData() {
       await fetch(props.jsonAddress)

@@ -39,6 +39,10 @@ const Search = ({packages, setPackages, setSearchTerm}) => {
       <input 
         type="text" 
         placeholder="Search..." 
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='off'
+        spellCheck='false'
         onChange={handleChange} 
       />
     </div>
